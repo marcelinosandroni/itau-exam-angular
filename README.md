@@ -1,27 +1,37 @@
-# ItauExamAngular
+# Itau Angular Exam
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+## Introduction
 
-## Development server
+This is a exam challenge for front end developer for Itaú company, the biggest bank in Brazil, using Angular framework and most of its features.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Requirements for Pleno position:
 
-## Code scaffolding
+* Full Angular project
+* Layout following exact 100% the prototype
+* Route system
+* Use CSS Grid
+* Sass
+* Input masks
+* Angular Material Components
+* Required all field with Rx Forms
+* Interceptors
+* Advanced language usage
+* Project architecture looking for scalability
+* Error handler with Toaster
+* Usage of custom types (models)
+* Multi language with EN/PT using i18n
+* External plugins usage in intelligent way, looking for performance
+* Commented code (many comments look like bad code)
+* Build <app-cep> component + Event Emitter to feed other fields
+* Pipes for formats
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Prototype
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The project follow exact this [Prototype](https://projects.invisionapp.com/share/P510TQNYQ3TJ#/screens/450456419)
 
-## Running unit tests
+## Commands
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Start
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+`npm start`
