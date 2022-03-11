@@ -1,0 +1,75 @@
+<ng-container *ngIf="business">
+  <div class="introduction">
+    <h2 class="title">Polo {{business.name}}</h2>
+    <p class="description">
+      exibindo detalhes do polo {{business.name}}#{{business.id}}
+    </p>
+  </div>
+
+  <form class="form">
+    <fieldset class="address">
+
+      <p>Detalhes do endereço</p>
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="CEP">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="Nome da Rua">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="Bairro">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="Estado">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="Cidade">
+      </mat-form-field>
+
+    </fieldset>
+
+    <fieldset class="company">
+
+      <p>Detalhes da Empresa</p>
+
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="Nome">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="Negócio">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="Avaliação">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="CNPJ">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="Ativo?">
+      </mat-form-field>
+
+    </fieldset>
+
+    <div class="button-group">
+
+      <button mat-flat-button color="accent" appGoBack type="button">Voltar</button>
+      <button mat-flat-button color="primary">Salvar</button>
+
+    </div>
+
+
+
+  </form>
+
+
+
+</ng-container>
