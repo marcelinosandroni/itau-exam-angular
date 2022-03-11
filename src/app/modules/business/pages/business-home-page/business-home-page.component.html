@@ -38,12 +38,10 @@
     <ng-container matColumnDef="action">
       <th *matHeaderCellDef mat-header-cell>Ação</th>
       <td mat-cell *matCellDef='let business'>
-        <a routerLink="/business/edit">
-          <mat-icon class="edit-icon material-icons-outlined" aria-hidden="false" aria-label="edit business"
-            (click)="goToBusiness(business.id)">
-            visibility
-          </mat-icon>
-        </a>
+        <mat-icon class="edit-icon material-icons-outlined" aria-hidden="false" aria-label="edit business"
+          (click)="goToBusiness(business.id)">
+          visibility
+        </mat-icon>
       </td>
     </ng-container>
 

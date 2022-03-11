@@ -24,7 +24,6 @@ export class BusinessHomePageComponent implements OnInit, AfterViewInit {
   ) { }
 
   goToBusiness(id: number): void {
-    console.log(`click on id ${id}`)
     this.router.navigate([`/business/${id}`])
   }
 
