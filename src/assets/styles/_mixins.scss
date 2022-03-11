@@ -1,0 +1,14 @@
+@mixin grid($row, $col) {
+  display: grid;
+  grid: $row / $col;
+}
+
+@mixin gridFit() {
+  display: grid;
+  grid-column: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+@mixin content() {
+  width: clamp(350px, 90%, 1240px);
+  margin: auto;
+}

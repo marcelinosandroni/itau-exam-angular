@@ -1,0 +1,51 @@
+/*
+ * These fonts was extracted from ITAU website for exam purpose only
+ * Not permited comercial use without the correct license
+ * see more at https://www.itau.com.br
+ */
+
+
+// Itau-Text
+@font-face {
+  font-family: 'Itau-Text';
+  src: url('../fonts/ItauText_Rg.woff2');
+  font-weight: normal;
+  font-stretch: expanded;
+}
+
+@font-face {
+  font-family: 'Itau-Text';
+  src: url('../fonts/ItauText_Bd.woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Itau-Text';
+  src: url('../fonts/ItauText_Lt.woff2');
+  font-weight: 200;
+}
+
+
+// Itau-Display
+@font-face {
+  font-family: 'Itau-Display';
+  src: url('../fonts/itaudisplay_rg-webfont.woff2');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'Itau-Display';
+  src: url('../fonts/itaudisplay_bd-webfont.woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Itau-Display';
+  src: url('../fonts/itaudisplay_lt-webfont.woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Itau-Display';
+  src: url('../fonts/itaudisplay_xbd-webfont.woff2');
+  font-weight: 900;
+}

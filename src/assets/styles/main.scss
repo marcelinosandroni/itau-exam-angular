@@ -1,0 +1,19 @@
+// Main style file with global settings
+// Follow the sass guideline https://sass-guidelin.es/
+@charset 'utf-8';
+
+@use 'theme';
+@use 'typography';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

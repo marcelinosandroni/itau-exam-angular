@@ -1,0 +1,67 @@
+// Custom theme for Itau Exam
+@use '@angular/material' as mat;
+
+// custom pallet for itau orange colors
+$itau-primary-colors: (
+  50: #fff9e6,
+  100: #ffefbe,
+  200: #ffe496,
+  300: #ffdb70,
+  400: #ffd159,
+  500: #ffca52,
+  600: #ffbd4d,
+  700: #ffab48,
+  800: #ff9c46,
+  900: #fa8241,
+  A100: #fa8241,
+  A200: #fa8241,
+  A400: #fa8241,
+  A700: #fa8241,
+);
+
+// custom pallet for itau gray colors
+$itau-accent-colors: (
+  50: #f9f9f9,
+  100: #f3f3f3,
+  200: #eaeaea,
+  300: #dbdbdb,
+  400: #b8b8b8,
+  500: #989898,
+  600: #6f6f6f,
+  700: #5c5c5c,
+  800: #3d3d3d,
+  900: #1d1d1d,
+);
+
+// TODO: build custom warning pallet for itau brand
+
+// default contrast for itau primary pallet
+$itau-contrast-color: #fff;
+
+// create contrast map with same color for all variations
+// TODO: need to setup each variation to math the pallet color
+$contrast-map: ();
+@each $key, $value in $itau-primary-colors {
+  $contrast-map: map-merge($contrast-map, ($key: $itau-contrast-color));
+}
+
+// merge primary and contrast
+$itau-primary-colors: map-merge($itau-primary-colors, (contrast: $contrast-map));
+$itau-accent-colors: map-merge($itau-accent-colors, (contrast: $contrast-map));
+
+// build the custom theme
+$pallet-primary: mat.define-palette($itau-primary-colors, 900, 900, 900);
+$pallet-accent: mat.define-palette($itau-accent-colors, 500, 500, 500);
+$pallet-warn: mat.define-palette(mat.$red-palette);
+
+// TODO: define dark theme
+$theme: mat.define-light-theme((
+  color: (
+    primary: $pallet-primary,
+    accent: $pallet-accent,
+    warn: $pallet-warn,
+  )
+));
+
+@include mat.core();
+@include mat.all-component-themes($theme);
