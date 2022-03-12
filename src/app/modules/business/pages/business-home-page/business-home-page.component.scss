@@ -38,8 +38,36 @@ table {
   width: 100%;
 }
 
+
+.mat-column-name {
+  width: 30%;
+}
+
+td.mat-column-name {
+  font-weight: bold;
+}
+
+.mat-column-business {
+  width: 30%;
+}
+
+.mat-column-valuation {
+  width: 20%;
+}
+
+.mat-column-active {
+  width: 8%;
+  text-align: center !important;
+}
+
+.mat-column-action {
+  width: 10%;
+  text-align: center !important;
+}
+
 .edit-icon {
   cursor: pointer;
+
 }
 
 .indicator {
@@ -47,6 +75,7 @@ table {
   height: 10px;
   clip-path: circle(50%);
   background-color: #FF7573;
+  margin: auto;
 }
 
 .active {

@@ -10,7 +10,7 @@
 </form>
 
 <div class="table-container">
-  <table *ngIf="businesses.length" mat-table [dataSource]="businesses" class="mat-elevation-z8 business-table">
+  <table *ngIf="dataSource" mat-table [dataSource]="dataSource" class="mat-elevation-z8 business-table">
 
     <ng-container matColumnDef="name">
       <th *matHeaderCellDef mat-header-cell>Nome</th>
@@ -50,7 +50,7 @@
 
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" pageSize="5" aria-label="Select page of periodic elements">
   </mat-paginator>
 
 </div>

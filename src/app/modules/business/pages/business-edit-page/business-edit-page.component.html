@@ -6,63 +6,74 @@
     </p>
   </div>
 
-  <form class="form">
-    <fieldset class="address">
-
+  <form class="form" [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+    <fieldset class="address" formGroupName="address">
       <p>Detalhes do endereço</p>
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="CEP">
+        <mat-label>CEP</mat-label>
+        <input matInput formControlName="cep" type="text" placeholder="CEP">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="Nome da Rua">
+        <mat-label>Nome da Rua</mat-label>
+        <input matInput formControlName="street" type="text" placeholder="Nome da Rua">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="Bairro">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="district" type="text" placeholder="Bairro">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="Estado">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="city" type="text" placeholder="Cidade">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="Cidade">
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="state" type="text" placeholder="Estado">
       </mat-form-field>
 
     </fieldset>
 
-    <fieldset class="company">
+    <fieldset class="company" formGroupName="company">
 
       <p>Detalhes da Empresa</p>
 
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="Nome">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" type="text" placeholder="Nome">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="Negócio">
+        <mat-label>Negócio</mat-label>
+        <input matInput formControlName="business" type="text" placeholder="Negócio">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="Avaliação">
+        <mat-label>Avaliação</mat-label>
+        <input matInput formControlName="valuation" type="text" placeholder="Avaliação">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="CNPJ">
+        <mat-label>CNPJ</mat-label>
+        <input formControlName="cnpj" matInput type="text" placeholder="CNPJ">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="Ativo?">
+        <mat-label>Ativo?</mat-label>
+        <input formControlName="active" matInput type="text" placeholder="Ativo?">
       </mat-form-field>
-
     </fieldset>
 
     <div class="button-group">
-
-      <button mat-flat-button color="accent" appGoBack type="button">Voltar</button>
-      <button mat-flat-button color="primary">Salvar</button>
+      <button mat-flat-button color="accent" appGoBack type="button">
+        Voltar
+      </button>
+      <button mat-flat-button color="primary" [disabled]="!businessForm.valid">
+        Salvar
+      </button>
 
     </div>
 

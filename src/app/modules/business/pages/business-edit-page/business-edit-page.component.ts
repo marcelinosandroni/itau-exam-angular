@@ -2,9 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Business } from 'src/app/shared/models/business';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router'
 import { BusinessService } from '../../business.service';
-import { switchMap } from 'rxjs';
-import { Location } from '@angular/common'
-import { PathLocationStrategy } from '@angular/common'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-business-edit-page',
@@ -14,8 +12,29 @@ import { PathLocationStrategy } from '@angular/common'
 export class BusinessEditPageComponent implements OnInit {
   business?: Business
   name?: string
+  businessForm = this.formBuilder.group({
+    address: this.formBuilder.group({
+      cep: ['', Validators.required],
+      street: [''],
+      district: [''],
+      city: [''],
+      state: [''],
+    }),
+    company: this.formBuilder.group({
+      name: ['', Validators.required],
+      business: ['', Validators.required],
+      valuation: ['', Validators.required],
+      cnpj: ['', Validators.required],
+      active: ['', Validators.required],
+    })
+  })
 
-  constructor(private route: ActivatedRoute, private router: Router, private businessService: BusinessService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private businessService: BusinessService,
+    private formBuilder: FormBuilder
+  ) { }
 
   getBusiness(id: number) {
     console.log(`received id ${id}`)
@@ -29,6 +48,10 @@ export class BusinessEditPageComponent implements OnInit {
     console.log({ business })
 
     this.business = business
+  }
+
+  onSubmit() {
+
   }
 
   ngOnInit(): void {

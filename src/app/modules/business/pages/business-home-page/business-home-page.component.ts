@@ -12,16 +12,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./business-home-page.component.scss']
 })
 export class BusinessHomePageComponent implements OnInit, AfterViewInit {
-  businesses: Business[] = []
-  dataSource = new MatTableDataSource<Business>(this.businesses)
+  businesses?: Business[]
   columnsToDisplay = ['name', 'business', 'valuation', 'active', 'action']
+  dataSource?: MatTableDataSource<any>
 
-  @ViewChild(MatPaginator) pagination?: MatPaginator;
+
+  @ViewChild(MatPaginator) pagination!: MatPaginator;
 
   constructor(
     private businessService: BusinessService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   goToBusiness(id: number): void {
     this.router.navigate([`/business/${id}`])
@@ -29,10 +31,13 @@ export class BusinessHomePageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.businesses = this.businessService.getBusinesses()
+    this.dataSource = new MatTableDataSource<Business>(this.businesses)
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.pagination as MatPaginator
+    if (this.dataSource) {
+      this.dataSource.paginator = this.pagination
+    }
   }
 
 }
