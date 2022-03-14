@@ -1,11 +1,12 @@
 <div class="introduction">
-  <h2 class="title">Polos Itaú</h2>
-  <p class="description">confira abaixo alguns dos principais polos Itau</p>
+  <h2 class="title">{{ 'home.title' | translate }}</h2>
+  <p class="description">{{ 'home.description' | translate}}</p>
 </div>
 
 <form class="form">
   <mat-form-field appearance="outline">
-    <input matInput class="search" type="search" placeholder="Pesquisar...">
+    <input matInput class="search" type="search" [attr.placeholder]="'home.search' | translate" (input)="filterSearch()"
+      [(ngModel)]="search" name="search">
   </mat-form-field>
 </form>
 
@@ -13,30 +14,32 @@
   <table *ngIf="dataSource" mat-table [dataSource]="dataSource" class="mat-elevation-z8 business-table">
 
     <ng-container matColumnDef="name">
-      <th *matHeaderCellDef mat-header-cell>Nome</th>
+      <th *matHeaderCellDef mat-header-cell>{{ 'business.name' | translate}}</th>
       <td mat-cell *matCellDef='let business'>{{business.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="business">
-      <th *matHeaderCellDef mat-header-cell>Negócio</th>
+      <th *matHeaderCellDef mat-header-cell>{{'business.business' | translate}}</th>
       <td mat-cell *matCellDef='let business'>{{business.business}}</td>
     </ng-container>
 
 
     <ng-container matColumnDef="valuation">
-      <th *matHeaderCellDef mat-header-cell>Avaliação</th>
-      <td mat-cell *matCellDef='let business'>{{business.valuation}}</td>
+      <th *matHeaderCellDef mat-header-cell>{{'business.valuation' | translate}}</th>
+      <td mat-cell *matCellDef='let business'>
+        {{business.valuation | currency: currency}}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="active">
-      <th *matHeaderCellDef mat-header-cell>Situação</th>
+      <th *matHeaderCellDef mat-header-cell>{{ 'business.active' | translate}}</th>
       <td mat-cell *matCellDef='let business'>
         <div class="indicator" [class.active]="business.active"></div>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th *matHeaderCellDef mat-header-cell>Ação</th>
+      <th *matHeaderCellDef mat-header-cell>{{'business.action' | translate}}</th>
       <td mat-cell *matCellDef='let business'>
         <mat-icon class="edit-icon material-icons-outlined" aria-hidden="false" aria-label="edit business"
           (click)="goToBusiness(business.id)">
@@ -50,7 +53,7 @@
 
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" pageSize="5" aria-label="Select page of periodic elements">
-  </mat-paginator>
+  <app-pagination (setDataSource)="setPagination($event)">
+  </app-pagination>
 
 </div>
