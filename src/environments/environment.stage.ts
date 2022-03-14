@@ -1,10 +1,10 @@
 import { Environment } from "./environment.interface";
 
-// production environment
-// update settings to deploy
+// default stage settings
 export const environment: Environment = {
   production: true,
-  name: 'production',
+  name: 'staging',
   port: 80,
-  api: 'https://www.businessapi.heroku.com'
+  api: 'https://businessapi-test.heroku.com'
 };
+
