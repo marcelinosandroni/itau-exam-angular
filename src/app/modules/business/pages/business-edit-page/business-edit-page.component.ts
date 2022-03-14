@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Business } from 'src/app/shared/models/business';
-import { Address } from 'src/app/shared/models/address';
-import { Company } from 'src/app/shared/models/company';
 import { Router, ActivatedRoute } from '@angular/router'
 import { BusinessService } from '../../business.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CepService } from 'src/app/core/cep.service';
 import { CnpjPipe } from 'src/app/shared/pipes/cnpj.pipe';
 import { CepResponse } from 'src/app/shared/models/cep-response';
 import { IsLoadingService } from 'src/app/shared/is-loading.service';
-import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LanguageService } from 'src/app/core/language/language.service';
 
 @Component({
   selector: 'app-business-edit-page',
@@ -45,19 +44,17 @@ export class BusinessEditPageComponent implements OnInit {
     private cepService: CepService,
     private cnpjPipe: CnpjPipe,
     private isLoadingService: IsLoadingService,
-    private toaster: MatSnackBar
+    private toaster: MatSnackBar,
+    private languageService: LanguageService
   ) {
     this.isLoading = isLoadingService.status
     this.isLoadingService.isLoading$.subscribe(status => {
       this.isLoading = status
     })
-    console.log({ constructor: this.businessForm })
   }
 
   getBusiness(id: number) {
-    console.log(`received id ${id}`)
     this.businessService.getBusinessById(id).subscribe(business => {
-      console.log({ business })
       this.business = business
       this.cepService.find(business.cep).subscribe(this.updateAddressForm)
     })
@@ -70,11 +67,8 @@ export class BusinessEditPageComponent implements OnInit {
 
   // changed to arrow function, this inside subscribe dont work even with binded this
   updateAddressForm = (response: CepResponse) => {
-    console.log({ test: this })
-    console.log({ response })
     if (!response || response.erro) return
     const business = this.business as Business
-    console.log({ startedForm: this.businessForm })
     this.businessForm.setValue({
       address: {
         cep: response.cep,
@@ -94,7 +88,6 @@ export class BusinessEditPageComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.businessForm.value)
     if (!this.businessForm.valid) return
     if (!this.business?.id) return
 
@@ -106,22 +99,20 @@ export class BusinessEditPageComponent implements OnInit {
 
     this.businessService.updateBusiness(id, updateBusiness)
       .subscribe(business => {
-        console.log({ business })
         this.openToaster()
       })
   }
 
   openToaster() {
-    this.toaster.open('Dados atualizados com sucessos', 'Ok', {
+    const message = this.languageService.getNow('edit.update')
+
+    this.toaster.open(message, '', {
       verticalPosition: 'top', duration: 3000
     })
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      console.log('getting business')
-      console.log(`ID: ${params['id']}`)
-      console.log({ params })
       this.getBusiness(Number(params['id']))
     }
     )

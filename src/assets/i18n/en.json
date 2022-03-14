@@ -4,6 +4,24 @@
     "description": "See bellow some of your main Itaú poles.",
     "search": "Search"
   },
+  "edit": {
+    "title": "Pole",
+    "description": "showing details of pole",
+    "address": "Address details",
+    "company": "Company details",
+    "back": "Voltar",
+    "save": "Salvar",
+    "positive": "Yes",
+    "negative": "No",
+    "update": "Data updated successfully"
+  },
+  "address": {
+    "cep": "CEP",
+    "street": "Street name",
+    "neighborhood": "Neighborhood",
+    "city": "City",
+    "state": "State"
+  },
   "business": {
     "name": "Name",
     "business": "Business",
@@ -12,8 +30,14 @@
     "action": "Action"
   },
   "pagination": {
-    "perPage": "Items perpage",
-    "of": "of"
+    "firstPage": "Page 1 of 1",
+    "perPage": "Items per page",
+    "page": "page",
+    "of": "of",
+    "first": "First page",
+    "last": "Last page",
+    "next": "Next page",
+    "prev": "Previous page"
   },
   "user": {
     "director": "Director"

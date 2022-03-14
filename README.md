@@ -35,3 +35,50 @@ The project follow exact this [Prototype](https://projects.invisionapp.com/share
 ### Start
 
 `npm start`
+
+### Server
+
+You can use the mocked server with `json-server`
+
+use the script, by default listen on port 3210
+
+`npm run server`
+
+After some updates, you can reset the mock with
+
+`npm run mock`
+
+### Config
+
+The environment files have custom configs to stup the app at runtime with dependence injection
+
+** options**
+
+`environment.interface.ts`
+
+* Interface *
+
+```
+export interface Environment {
+  production: boolean
+  name: string
+  port: number
+  api: string
+  useInMemoryData?: boolean
+  inMemoryDataDelay?: number,
+  logger: boolean
+}
+
+```
+
+# Internacionalization
+
+The app have custom locales to change the language.
+
+Default is `pt`, with `en` option
+
+Files are located at `assets/i18`
+
+### Storybook
+
+In development to expose the components, needed setup

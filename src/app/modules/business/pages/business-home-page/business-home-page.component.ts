@@ -27,6 +27,10 @@ export class BusinessHomePageComponent implements OnInit {
     private router: Router,
     private languageService: LanguageService
   ) {
+    this.updateCurrency()
+  }
+
+  updateCurrency() {
     this.languageService.getCurrency().subscribe(currency => {
       this.currency = currency
     })
@@ -62,12 +66,8 @@ export class BusinessHomePageComponent implements OnInit {
       this.businesses = business
       this.dataSource!.data = this.businesses
     })
+    this.languageService.onChance.subscribe(() => {
+      this.updateCurrency()
+    })
   }
-
-  // ngAfterViewInit() {
-  //   if (this.dataSource) {
-  //     this.dataSource.paginator = this.pagination
-  //   }
-  // }
-
 }

@@ -1,14 +1,15 @@
 <ng-container *ngIf="business; else loading">
   <div class="introduction">
-    <h2 class="title">Polo {{business?.name}}</h2>
+    <h2 class="title">{{'edit.title' | translate}} {{business?.name}}</h2>
     <p class="description">
-      exibindo detalhes do polo {{business?.name}}#{{business?.id}}
+      {{ 'edit.description' | translate }}
+      {{business?.name}}#{{business?.id}}
     </p>
   </div>
 
   <form class="form" [formGroup]="businessForm" (ngSubmit)="onSubmit()">
     <fieldset class="address" formGroupName="address">
-      <p>Detalhes do endereço</p>
+      <p>{{'edit.address' | translate}}</p>
       <mat-form-field appearance="outline">
         <mat-label>CEP</mat-label>
         <input matInput formControlName="cep" maskCep (change)="onChangeCep()" type="text" maxlength="10"
@@ -16,43 +17,46 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Nome da Rua</mat-label>
+        <mat-label>{{'address.street' | translate}}</mat-label>
         <input matInput formControlName="street" type="text" placeholder="Nome da Rua" [disableControl]="isLoading">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Bairro</mat-label>
-        <input matInput formControlName="neighborhood" type="text" placeholder="Bairro" [disableControl]="isLoading">
+        <mat-label>{{'address.neighborhood' | translate}}</mat-label>
+        <input matInput formControlName="neighborhood" type="text"
+          [attr.placeholder]="'address.neighbohood' | translate" [disableControl]="isLoading">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Cidade</mat-label>
-        <input matInput formControlName="city" type="text" placeholder="Cidade" [disableControl]="isLoading">
+        <mat-label>{{'address.city' | translate}}</mat-label>
+        <input matInput formControlName="city" type="text" [attr.placeholder]="'address.city' | translate"
+          [disableControl]="isLoading">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Estado</mat-label>
-        <input matInput formControlName="state" type="text" placeholder="Estado" [disableControl]="isLoading">
+        <mat-label>{{'address.state' | translate}}</mat-label>
+        <input matInput formControlName="state" type="text" [attr.placeholder]="'address.state' | translate"
+          [disableControl]="isLoading">
       </mat-form-field>
 
     </fieldset>
 
     <fieldset class="company" formGroupName="company">
-      <p>Detalhes da Empresa</p>
+      <p>{{'edit.company' | translate}}</p>
 
       <mat-form-field appearance="outline">
-        <mat-label>Nome</mat-label>
+        <mat-label>{{'business.name' | translate}}</mat-label>
         <input matInput formControlName="name" type="text" maxlength="20" placeholder="Nome">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Negócio</mat-label>
-        <input matInput formControlName="business" type="text" placeholder="Negócio">
+        <mat-label>{{'business.business' | translate}}</mat-label>
+        <input matInput formControlName="business" type="text" [attr.placeholder]="'business.business' | translate">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Avaliação</mat-label>
-        <input matInput formControlName="valuation" type="text" placeholder="Avaliação">
+        <mat-label>{{'business.valuation' | translate}}</mat-label>
+        <input matInput formControlName="valuation" type="text" [attr.placeholder]="'business.valuation' | translate">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -62,7 +66,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Ativo?</mat-label>
+        <mat-label>{{'business.active' | translate}}</mat-label>
         <mat-select formControlName="active">
           <mat-option *ngFor="let situation of ['Sim', 'Não']" [value]="situation == 'Sim'">
             {{situation}}
@@ -73,10 +77,10 @@
 
     <div class="button-group">
       <button mat-flat-button color="accent" appGoBack type="button">
-        Voltar
+        {{ 'edit.back' | translate }}
       </button>
       <button mat-flat-button color="primary" [disabled]="!businessForm.valid">
-        Salvar
+        {{ 'edit.save' | translate }}
       </button>
     </div>
   </form>

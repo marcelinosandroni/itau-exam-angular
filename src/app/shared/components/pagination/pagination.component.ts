@@ -12,12 +12,16 @@ import { PaginationIntl } from '../../providers/pagination.provider';
     provide: MatPaginatorIntl, useClass: PaginationIntl
   }]
 })
-export class PaginationComponent implements AfterViewInit {
+export class PaginationComponent implements OnInit, AfterViewInit {
   @Output() setDataSource: EventEmitter<any> = new EventEmitter()
   @ViewChild(MatPaginator) pagination!: MatPaginator;
 
   setPagination() {
     this.setDataSource.emit(this.pagination)
+  }
+
+  ngOnInit(): void {
+
   }
 
   ngAfterViewInit(): void {

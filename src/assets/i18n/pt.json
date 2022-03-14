@@ -4,6 +4,24 @@
     "description": "configura abaixo alguns dos principais polos Itaú",
     "search": "Pesquisar"
   },
+  "edit": {
+    "title": "Polo",
+    "description": "exibindo detalhes do polo",
+    "company": "Detalhes da Empresa",
+    "address": "Detalhes do endereço",
+    "back": "Voltar",
+    "save": "Salvar",
+    "positive": "Sim",
+    "negative": "Não",
+    "update": "Dados atualizados com sucesso!"
+  },
+  "address": {
+    "cep": "CEP",
+    "street": "Nome da Rua",
+    "neighborhood": "Bairro",
+    "city": "Cidade",
+    "state": "Estado"
+  },
   "business": {
     "name": "Nome",
     "business": "Negócio",

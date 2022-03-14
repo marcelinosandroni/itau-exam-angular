@@ -1,4 +1,4 @@
-import { Injectable, ViewChild } from "@angular/core"
+import { ChangeDetectorRef, Injectable, ViewChild } from "@angular/core"
 import { MatPaginator, MatPaginatorIntl } from "@angular/material/paginator"
 import { Subject } from "rxjs"
 import { LanguageService } from "src/app/core/language/language.service"
@@ -18,7 +18,16 @@ export class PaginationIntl implements MatPaginatorIntl {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
-  constructor(private languageService: LanguageService) {
+  constructor(private languageService: LanguageService,
+    private changeDetector: ChangeDetectorRef) {
+    this.updateLabels()
+    this.languageService.onChance.subscribe(() => {
+      this.updateLabels()
+      this.changeDetector.detectChanges()
+    })
+  }
+
+  updateLabels() {
     this.languageService.getTranslation().subscribe(translation => {
       const { first, last, next, prev, perPage, page, firstPage, of } = translation.pagination
       this.firstPageLabel = first
@@ -42,7 +51,4 @@ export class PaginationIntl implements MatPaginatorIntl {
     const of = this.of
     return `${pageName} ${page + 1} ${of} ${amountPages}`;
   }
-
-
-
 }
