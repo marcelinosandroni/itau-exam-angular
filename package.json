@@ -9,7 +9,8 @@
     "test": "ng test",
     "mock": "tsc ./src/app/core/mock/create-json.ts --outDir ./dist && node ./dist/core/mock/create-json.js",
     "server": "npx json-server --watch -p 3210 business.json",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "dockerp": "docker-compose up"
   },
   "private": true,
   "dependencies": {
@@ -37,7 +38,6 @@
     "@angular-eslint/eslint-plugin-template": "13.1.0",
     "@angular-eslint/schematics": "13.1.0",
     "@angular-eslint/template-parser": "13.1.0",
-    "@angular/cli": "~13.2.5",
     "@angular/compiler-cli": "~13.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
