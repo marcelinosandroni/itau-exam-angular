@@ -34,7 +34,7 @@ export const BUSINESS: Business[] = [
     business: 'Polo Fake',
     valuation: 0,
     active: false,
-    cep: '99999999',
+    cep: '08557-900',
     cnpj: 12345678000001
   },
   {

@@ -37,7 +37,9 @@
     "first": "Primeira página",
     "last": "Última página",
     "next": "Próxima página",
-    "prev": "Página anterior"
+    "prev": "Página anterior",
+    "total": "de um total de",
+    "register": "registros"
   },
   "user": {
     "director": "Diretor"

@@ -37,7 +37,9 @@
     "first": "First page",
     "last": "Last page",
     "next": "Next page",
-    "prev": "Previous page"
+    "prev": "Previous page",
+    "total": "of a total of",
+    "register": "register"
   },
   "user": {
     "director": "Director"

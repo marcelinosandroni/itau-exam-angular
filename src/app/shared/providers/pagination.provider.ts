@@ -15,6 +15,8 @@ export class PaginationIntl implements MatPaginatorIntl {
   page = ''
   onePage = ''
   of = ''
+  total = ''
+  register = ''
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
@@ -29,7 +31,7 @@ export class PaginationIntl implements MatPaginatorIntl {
 
   updateLabels() {
     this.languageService.getTranslation().subscribe(translation => {
-      const { first, last, next, prev, perPage, page, firstPage, of } = translation.pagination
+      const { first, last, next, prev, perPage, page, firstPage, of, total, register } = translation.pagination
       this.firstPageLabel = first
       this.itemsPerPageLabel = perPage
       this.lastPageLabel = last
@@ -39,6 +41,8 @@ export class PaginationIntl implements MatPaginatorIntl {
       this.page = page
       this.onePage = firstPage
       this.of = of
+      this.total = total
+      this.register = register
     })
   }
 
@@ -49,6 +53,8 @@ export class PaginationIntl implements MatPaginatorIntl {
     const amountPages = Math.ceil(length / pageSize);
     const pageName = this.page
     const of = this.of
-    return `${pageName} ${page + 1} ${of} ${amountPages}`;
+    const total = this.total
+    const register = this.register
+    return `${pageName} ${page + 1} ${of} ${amountPages} ${total} ${length} ${register}`;
   }
 }

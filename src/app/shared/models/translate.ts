@@ -29,6 +29,8 @@ type Pagination = {
   last: string
   next: string
   prev: string
+  total: string
+  register: string
 }
 
 type User = {
