@@ -40,9 +40,9 @@ For better scalability the folder structure is organized in three main folders:
 
 ## Pictures
 
-** Basic functionality **
+**Basic functionality**
 
-[Fast Presentation]('src/assets/screens/fast-recorder.gif')
+![Fast Presentation](src/assets/screens/fast-recorder.gif)
 
 
 ## Commands
@@ -81,11 +81,11 @@ To run the app with mocked server to development and test
 
 The environment files have custom configs to stup the app at runtime with dependence injection
 
-** options **
+**options**
 
 `environment.interface.ts`
 
-* Interface *
+*Interface*
 
 ```
 export interface Environment {
