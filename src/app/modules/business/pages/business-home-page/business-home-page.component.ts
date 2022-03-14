@@ -47,10 +47,8 @@ export class BusinessHomePageComponent implements OnInit {
   }
 
   filterSearch() {
-    console.log({ search: this.search })
     const searchPattern = new RegExp(`${this.search}`, 'i')
     if (this.businesses) {
-      console.log('FILTERING')
       const filteredBusinesses = this.businesses
         .filter(business => searchPattern.test(business.name))
 

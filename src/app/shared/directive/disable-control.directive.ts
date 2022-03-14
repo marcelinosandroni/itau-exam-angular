@@ -9,8 +9,6 @@ export class DisableControlDirective {
   constructor(private ngControl: NgControl) { }
 
   @Input() set disableControl(condition: boolean) {
-    console.log({ condition })
-    console.log({ control: this.ngControl.control })
     if (condition) {
       this.ngControl.control?.disable()
     } else {

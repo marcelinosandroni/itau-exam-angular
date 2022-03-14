@@ -10,7 +10,6 @@ export class CepPipe implements PipeTransform {
   maxLength = 10
 
   transform(cep: number | string): string {
-    console.log({ cep })
     if (!cep) return ''
 
     if (typeof cep === 'number') {

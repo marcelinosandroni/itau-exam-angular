@@ -32,7 +32,6 @@ export class CepService {
 
     }
     const cepPattern = new RegExp(/^\d{8}$/)
-    console.log({ cepPattern })
     if (typeof cep === 'number') {
       this.LoggerService.warn(`converting number cep to string`)
       cep = String(cep)

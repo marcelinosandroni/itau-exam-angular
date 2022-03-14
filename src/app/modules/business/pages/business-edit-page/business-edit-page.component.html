@@ -68,7 +68,7 @@
       <mat-form-field appearance="outline">
         <mat-label>{{'business.active' | translate}}</mat-label>
         <mat-select formControlName="active">
-          <mat-option *ngFor="let situation of ['Sim', 'Não']" [value]="situation == 'Sim'">
+          <mat-option *ngFor="let situation of ['Sim', 'Não']" [value]="situation === 'Sim'">
             {{situation}}
           </mat-option>
         </mat-select>
