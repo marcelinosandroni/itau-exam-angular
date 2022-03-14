@@ -30,13 +30,33 @@ Requirements for Pleno position:
 
 The project follow exact this [Prototype](https://projects.invisionapp.com/share/P510TQNYQ3TJ#/screens/450456419)
 
+## Structure
+
+For better scalability the folder structure is organized in three main folders:
+
+> core - main project features
+> shared - features to share in the entire project
+> modules - individual modules separated in sub folders
+
+## Pictures
+
+** Basic functionality **
+
+[Fast Presentation]('src/assets/screens/fast-recorder.gif')
+
+
 ## Commands
 
 ### Start
 
 `npm start`
 
-### Server
+
+### build
+
+`npm run build`
+
+## Server
 
 You can use the mocked server with `json-server`
 
@@ -48,11 +68,20 @@ After some updates, you can reset the mock with
 
 `npm run mock`
 
-### Config
+## Docker
+
+For better development experience and compatibility, run the project inside the container
+
+To run the app with mocked server to development and test
+
+`docker-compose up`
+
+
+## Config
 
 The environment files have custom configs to stup the app at runtime with dependence injection
 
-** options**
+** options **
 
 `environment.interface.ts`
 
@@ -71,7 +100,7 @@ export interface Environment {
 
 ```
 
-# Internacionalization
+## Internacionalization
 
 The app have custom locales to change the language.
 
@@ -79,6 +108,6 @@ Default is `pt`, with `en` option
 
 Files are located at `assets/i18`
 
-### Storybook
+## Storybook
 
 In development to expose the components, needed setup
