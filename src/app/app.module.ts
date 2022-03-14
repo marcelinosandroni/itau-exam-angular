@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BusinessModule } from './modules/business/business.module';
 import { CoreModule } from './core/core.module';
 import { FormsModule } from '@angular/forms';
-import { GoBackDirective } from './shared/directive/go-back.directive';
+import { ENVIRONMENT, getEnvironment } from 'src/environments/environment.provider';
 import { SharedModule } from './shared/shared.module';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,16 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    NoopAnimationsModule,
+    SharedModule,
     CoreModule,
     BusinessModule,
   ],
-  providers: [],
+  providers: [
+    { provide: ENVIRONMENT, useFactory: getEnvironment }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
