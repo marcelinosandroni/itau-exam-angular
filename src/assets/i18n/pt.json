@@ -1,0 +1,28 @@
+{
+  "home": {
+    "title": "Polos Itaú",
+    "description": "configura abaixo alguns dos principais polos Itaú",
+    "search": "Pesquisar"
+  },
+  "business": {
+    "name": "Nome",
+    "business": "Negócio",
+    "valuation": "Avaliação",
+    "active": "Situação",
+    "action": "Ação"
+  },
+  "pagination": {
+    "firstPage": "Página 1 de 1",
+    "perPage": "Itens por página",
+    "page": "página",
+    "of": "de",
+    "first": "Primeira página",
+    "last": "Última página",
+    "next": "Próxima página",
+    "prev": "Página anterior"
+  },
+  "user": {
+    "director": "Diretor"
+  },
+  "currency": "BRL"
+}

@@ -54,6 +54,7 @@ $pallet-primary: mat.define-palette($itau-primary-colors, 900, 900, 900);
 $pallet-accent: mat.define-palette($itau-accent-colors, 500, 500, 500);
 $pallet-warn: mat.define-palette(mat.$red-palette);
 
+
 // TODO: define dark theme
 $theme: mat.define-light-theme((
   color: (

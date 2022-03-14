@@ -1,0 +1,22 @@
+{
+  "home": {
+    "title": "Itaú Poles",
+    "description": "See bellow some of your main Itaú poles.",
+    "search": "Search"
+  },
+  "business": {
+    "name": "Name",
+    "business": "Business",
+    "valuation": "Valuation",
+    "active": "Situation",
+    "action": "Action"
+  },
+  "pagination": {
+    "perPage": "Items perpage",
+    "of": "of"
+  },
+  "user": {
+    "director": "Director"
+  },
+  "currency": "USD"
+}
