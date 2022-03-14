@@ -1,8 +1,8 @@
-<ng-container *ngIf="business">
+<ng-container *ngIf="business; else loading">
   <div class="introduction">
-    <h2 class="title">Polo {{business.name}}</h2>
+    <h2 class="title">Polo {{business?.name}}</h2>
     <p class="description">
-      exibindo detalhes do polo {{business.name}}#{{business.id}}
+      exibindo detalhes do polo {{business?.name}}#{{business?.id}}
     </p>
   </div>
 
@@ -11,39 +11,38 @@
       <p>Detalhes do endereço</p>
       <mat-form-field appearance="outline">
         <mat-label>CEP</mat-label>
-        <input matInput formControlName="cep" type="text" placeholder="CEP">
+        <input matInput formControlName="cep" maskCep (change)="onChangeCep()" type="text" maxlength="10"
+          placeholder="CEP">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Nome da Rua</mat-label>
-        <input matInput formControlName="street" type="text" placeholder="Nome da Rua">
+        <input matInput formControlName="street" type="text" placeholder="Nome da Rua" [disableControl]="isLoading">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Bairro</mat-label>
-        <input matInput formControlName="district" type="text" placeholder="Bairro">
+        <input matInput formControlName="neighborhood" type="text" placeholder="Bairro" [disableControl]="isLoading">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Cidade</mat-label>
-        <input matInput formControlName="city" type="text" placeholder="Cidade">
+        <input matInput formControlName="city" type="text" placeholder="Cidade" [disableControl]="isLoading">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Estado</mat-label>
-        <input matInput formControlName="state" type="text" placeholder="Estado">
+        <input matInput formControlName="state" type="text" placeholder="Estado" [disableControl]="isLoading">
       </mat-form-field>
 
     </fieldset>
 
     <fieldset class="company" formGroupName="company">
-
       <p>Detalhes da Empresa</p>
-
 
       <mat-form-field appearance="outline">
         <mat-label>Nome</mat-label>
-        <input matInput formControlName="name" type="text" placeholder="Nome">
+        <input matInput formControlName="name" type="text" maxlength="20" placeholder="Nome">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -58,12 +57,17 @@
 
       <mat-form-field appearance="outline">
         <mat-label>CNPJ</mat-label>
-        <input formControlName="cnpj" matInput type="text" placeholder="CNPJ">
+        <input formControlName="cnpj" matInput maskCnpj type="text" autocomplete="off" maxlength="18"
+          placeholder="CNPJ">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Ativo?</mat-label>
-        <input formControlName="active" matInput type="text" placeholder="Ativo?">
+        <mat-select formControlName="active">
+          <mat-option *ngFor="let situation of ['Sim', 'Não']" [value]="situation == 'Sim'">
+            {{situation}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </fieldset>
 
@@ -74,13 +78,12 @@
       <button mat-flat-button color="primary" [disabled]="!businessForm.valid">
         Salvar
       </button>
-
     </div>
-
-
-
   </form>
-
-
-
 </ng-container>
+
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

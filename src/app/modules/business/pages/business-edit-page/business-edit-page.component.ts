@@ -1,8 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Business } from 'src/app/shared/models/business';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router'
+import { Address } from 'src/app/shared/models/address';
+import { Company } from 'src/app/shared/models/company';
+import { Router, ActivatedRoute } from '@angular/router'
 import { BusinessService } from '../../business.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CepService } from 'src/app/core/cep.service';
+import { CnpjPipe } from 'src/app/shared/pipes/cnpj.pipe';
+import { CepResponse } from 'src/app/shared/models/cep-response';
+import { IsLoadingService } from 'src/app/shared/is-loading.service';
+import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-business-edit-page',
@@ -12,11 +19,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class BusinessEditPageComponent implements OnInit {
   business?: Business
   name?: string
+  isLoading: boolean
   businessForm = this.formBuilder.group({
     address: this.formBuilder.group({
       cep: ['', Validators.required],
-      street: [''],
-      district: [''],
+      street: { value: '' },
+      neighborhood: [''],
       city: [''],
       state: [''],
     }),
@@ -33,25 +41,80 @@ export class BusinessEditPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private businessService: BusinessService,
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+    private cepService: CepService,
+    private cnpjPipe: CnpjPipe,
+    private isLoadingService: IsLoadingService,
+    private toaster: MatSnackBar
+  ) {
+    this.isLoading = isLoadingService.status
+    this.isLoadingService.isLoading$.subscribe(status => {
+      this.isLoading = status
+    })
+    console.log({ constructor: this.businessForm })
+  }
 
   getBusiness(id: number) {
     console.log(`received id ${id}`)
-    const business = this.businessService.getBusinessById(id)
+    this.businessService.getBusinessById(id).subscribe(business => {
+      console.log({ business })
+      this.business = business
+      this.cepService.find(business.cep).subscribe(this.updateAddressForm)
+    })
+  }
 
-    if (!business) {
-      console.log(`cant get id`)
-      this.router.navigate(['/not-found'])
-    }
+  onChangeCep() {
+    this.cepService.find(this.businessForm.value.address.cep)
+      .subscribe(this.updateAddressForm)
+  }
 
-    console.log({ business })
-
-    this.business = business
+  // changed to arrow function, this inside subscribe dont work even with binded this
+  updateAddressForm = (response: CepResponse) => {
+    console.log({ test: this })
+    console.log({ response })
+    if (!response || response.erro) return
+    const business = this.business as Business
+    console.log({ startedForm: this.businessForm })
+    this.businessForm.setValue({
+      address: {
+        cep: response.cep,
+        street: response.logradouro,
+        neighborhood: response.bairro,
+        city: response.localidade,
+        state: response.uf
+      },
+      company: {
+        name: business.name,
+        business: business.business,
+        valuation: business.valuation,
+        cnpj: this.cnpjPipe.transform(business.cnpj),
+        active: business.active
+      }
+    })
   }
 
   onSubmit() {
+    console.log(this.businessForm.value)
+    if (!this.businessForm.valid) return
+    if (!this.business?.id) return
 
+    const { id } = this.business
+    const updateBusiness = {
+      ...this.businessForm.value.company,
+      cep: this.businessForm.value.address.cep
+    }
+
+    this.businessService.updateBusiness(id, updateBusiness)
+      .subscribe(business => {
+        console.log({ business })
+        this.openToaster()
+      })
+  }
+
+  openToaster() {
+    this.toaster.open('Dados atualizados com sucessos', 'Ok', {
+      verticalPosition: 'top', duration: 3000
+    })
   }
 
   ngOnInit(): void {

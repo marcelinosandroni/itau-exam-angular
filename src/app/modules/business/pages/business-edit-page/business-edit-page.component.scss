@@ -1,5 +1,7 @@
 @use 'functions' as *;
 
+
+
 h2 {
   font-size: 26px;
   line-height: 1;
@@ -66,4 +68,10 @@ p {
   gap: 1rem;
 }
 
+.spinner-container {
+  width: 100%;
+  height: calc(90vh - 100px);
+  display: grid;
+  place-items: center;
 
+}
