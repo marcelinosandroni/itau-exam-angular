@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './mock/in-memory-data.service';
 import { SharedModule } from '../shared/shared.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 // Use mocked api if config in development environment is set
 const environment = getEnvironment()
@@ -37,6 +39,7 @@ const devModules = environment.useInMemoryData ? [
     MatMenuModule,
     MatDividerModule,
     MatIconModule,
+    MatToolbarModule,
     ...devModules
   ],
   exports: [
