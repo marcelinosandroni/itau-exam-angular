@@ -1,4 +1,28 @@
+@use 'sass:map';
+
 @function rem($size) {
   $remSize: calc($size / 16px);
   @return #{$remSize}rem;
+}
+
+@function add-background($theme, $background) {
+  $theme-color: map-get($theme, color);
+  $theme-background: map-get($theme-color, background);
+  $new-background: map-merge($theme-background, $background);
+  $new-color: map-merge($theme-color, (background: $new-background));
+  $theme-updated: map-merge($theme, (color: $new-color));
+  
+  @return $theme-updated;
+}
+
+@function add-contrast($pallet, $contrast) {
+  $contrast-map: ();
+
+  @each $key, $value in $pallet {
+    $contrast-map: map-merge($contrast-map, ($key: $contrast));
+  }
+
+  $pallet-with-contrast: map-merge($pallet, (contrast: $contrast-map));
+
+  @return $pallet-with-contrast;
 }

@@ -1,11 +1,12 @@
 // Custom theme for Itau Exam
 @use '@angular/material' as mat;
+@use 'functions' as *;
 
 // custom pallet for itau orange colors
-$itau-primary-colors: (
+$itau-light-primary: (
   50: #fff9e6,
   100: #ffefbe,
-  200: #ffe496,
+  200: #ffe0cc,
   300: #ffdb70,
   400: #ffd159,
   500: #ffca52,
@@ -20,7 +21,7 @@ $itau-primary-colors: (
 );
 
 // custom pallet for itau gray colors
-$itau-accent-colors: (
+$itau-light-accent: (
   50: #f9f9f9,
   100: #f3f3f3,
   200: #eaeaea,
@@ -36,33 +37,43 @@ $itau-accent-colors: (
 // TODO: build custom warning pallet for itau brand
 
 // default contrast for itau primary pallet
-$itau-contrast-color: #fff;
+$itau-light-contrast: #fff;
 
 // create contrast map with same color for all variations
 // TODO: need to setup each variation to math the pallet color
-$contrast-map: ();
-@each $key, $value in $itau-primary-colors {
-  $contrast-map: map-merge($contrast-map, ($key: $itau-contrast-color));
-}
 
 // merge primary and contrast
-$itau-primary-colors: map-merge($itau-primary-colors, (contrast: $contrast-map));
-$itau-accent-colors: map-merge($itau-accent-colors, (contrast: $contrast-map));
+$itau-light-primary: add-contrast($itau-light-primary, $itau-light-contrast);
+$itau-light-accent: add-contrast($itau-light-accent, $itau-light-contrast);
 
 // build the custom theme
-$pallet-primary: mat.define-palette($itau-primary-colors, 900, 900, 900);
-$pallet-accent: mat.define-palette($itau-accent-colors, 500, 500, 500);
-$pallet-warn: mat.define-palette(mat.$red-palette);
-
+$palette-light-primary: mat.define-palette($itau-light-primary, 900, 900, 900);
+$palette-light-accent: mat.define-palette($itau-light-accent, 500, 500, 500);
+$palette-light-warn: mat.define-palette(mat.$red-palette);
 
 // TODO: define dark theme
-$theme: mat.define-light-theme((
+$light: mat.define-light-theme((
   color: (
-    primary: $pallet-primary,
-    accent: $pallet-accent,
-    warn: $pallet-warn,
+    primary: $palette-light-primary,
+    accent: $palette-light-accent,
+    warn: $palette-light-warn
   )
 ));
 
-@include mat.core();
-@include mat.all-component-themes($theme);
+$light-background: (
+  app-bar: #FFE0CC,
+  background: #FBFBFB
+);
+
+// Use custom background replacing the default light material theme
+$light: add-background($light, $light-background);
+
+$dark: mat.define-dark-theme((
+  color: (
+    primary: mat.$indigo-palette,
+    accent: mat.$green-palette,
+    warn: mat.$red-palette
+  )
+));
+
+// $dark: add-background($dark, $test-background);

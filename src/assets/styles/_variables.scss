@@ -1,2 +1,9 @@
 // colors
-$primary: #FFE0CC;
+@use 'sass:map';
+@use 'theme';
+@use 'mixins';
+
+$header: #FFE0CC;
+$primary: map-get(theme.$light, primary, default);
+$accent: map-get(theme.$light, accent, default);
+$error: map-get(theme.$light, error, default);

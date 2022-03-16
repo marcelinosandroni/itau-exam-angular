@@ -1,3 +1,6 @@
+@use '@angular/material' as mat;
+@use 'theme';
+
 @mixin grid($row, $col) {
   display: grid;
   grid: $row / $col;
@@ -11,4 +14,21 @@
 @mixin content() {
   width: clamp(350px, 90%, 1240px);
   margin: auto;
+}
+
+@mixin theme($property, $pallet: primary, $variant: default) {
+  $light-color: mat.get-color-from-palette(theme.$light, $pallet, $variant);
+  $dark-color: mat.get-color-from-palette(theme.$light, $pallet, $variant);
+
+  & {
+    .light-theme {
+      #{$property}: $light-color;
+    }
+
+    .dark-theme {
+      #{$property}: $dark-color;
+
+    }
+  }
+
 }
