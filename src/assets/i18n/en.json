@@ -44,5 +44,12 @@
   "user": {
     "director": "Director"
   },
+  "alert": {
+    "update": "Data updated successfully",
+    "noItems": "No itens registered here",
+    "cepError": "We have a problem with the cep provider",
+    "cepWarn": "This CEP is invalid!",
+    "apiError": "Houston, we have a problem here."
+  },
   "currency": "USD"
 }

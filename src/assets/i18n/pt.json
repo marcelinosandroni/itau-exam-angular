@@ -44,5 +44,12 @@
   "user": {
     "director": "Diretor"
   },
+  "alert": {
+    "update": "Dados atualizados com sucesso!",
+    "noItems": "Infelizmente não temos dados ainda",
+    "cepError": "Tivemos um erro com o provedor de CEP",
+    "cepWarn": "O CEP informado não é válido!",
+    "apiError": "Ocorreu um erro ao consultar o dados"
+  },
   "currency": "BRL"
 }
