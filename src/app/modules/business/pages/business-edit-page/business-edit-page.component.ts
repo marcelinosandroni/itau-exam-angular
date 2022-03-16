@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Business } from 'src/app/shared/models/business';
-import { Router, ActivatedRoute } from '@angular/router'
 import { BusinessService } from '../../business.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CepService } from 'src/app/core/cep.service';
@@ -9,6 +8,10 @@ import { CepResponse } from 'src/app/shared/models/cep-response';
 import { IsLoadingService } from 'src/app/shared/is-loading.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LanguageService } from 'src/app/core/language/language.service';
+import { catchError, of } from 'rxjs';
+import { LoggerService } from 'src/app/core/logger.service';
+import { Translate } from 'src/app/shared/models/translate';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-business-edit-page',
@@ -22,7 +25,7 @@ export class BusinessEditPageComponent implements OnInit {
   businessForm = this.formBuilder.group({
     address: this.formBuilder.group({
       cep: ['', Validators.required],
-      street: { value: '' },
+      street: [''],
       neighborhood: [''],
       city: [''],
       state: [''],
@@ -35,29 +38,57 @@ export class BusinessEditPageComponent implements OnInit {
       active: ['', Validators.required],
     })
   })
+  alertMessages!: Translate['alert']
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private businessService: BusinessService,
     private formBuilder: FormBuilder,
     private cepService: CepService,
     private cnpjPipe: CnpjPipe,
     private isLoadingService: IsLoadingService,
     private toaster: MatSnackBar,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private loggerService: LoggerService
   ) {
     this.isLoading = isLoadingService.status
     this.isLoadingService.isLoading$.subscribe(status => {
       this.isLoading = status
     })
+    this.languageService.getTranslation()
+      .pipe(catchError(e => {
+        console.log({ error: e })
+        return of(e)
+      }))
+      .subscribe(translate => {
+        this.alertMessages = translate.alert
+      })
   }
 
   getBusiness(id: number) {
-    this.businessService.getBusinessById(id).subscribe(business => {
-      this.business = business
-      this.cepService.find(business.cep).subscribe(this.updateAddressForm)
-    })
+    const toaster = this.openToaster
+
+    // .pipe(catchError((e: any) => {
+    //   this.loggerService.error(e)
+    //   toaster(e, 'error'})
+    //   return of(e)
+    // }))
+    this.businessService.getBusinessById(id)
+      .pipe(catchError(e => {
+        this.loggerService.error(e)
+        toaster(this.alertMessages.update, 'error')
+        return of(e)
+      }))
+      .subscribe(business => {
+        this.business = business
+        this.cepService.find(business.cep)
+          .pipe(catchError(error => {
+            this.loggerService.error(error)
+            this.openToaster(error, 'error')
+            return of(error)
+          }))
+          .subscribe(this.updateAddressForm)
+      })
   }
 
   onChangeCep() {
@@ -67,7 +98,11 @@ export class BusinessEditPageComponent implements OnInit {
 
   // changed to arrow function, this inside subscribe dont work even with binded this
   updateAddressForm = (response: CepResponse) => {
-    if (!response || response.erro) return
+    if (!response || response.erro) {
+      this.loggerService.error(this.alertMessages.cepWarn)
+      this.openToaster(this.alertMessages.cepWarn, 'warn')
+      return
+    }
     const business = this.business as Business
     this.businessForm.setValue({
       address: {
@@ -99,15 +134,14 @@ export class BusinessEditPageComponent implements OnInit {
 
     this.businessService.updateBusiness(id, updateBusiness)
       .subscribe(business => {
-        this.openToaster()
+        this.business = business
+        this.openToaster(this.alertMessages.update)
       })
   }
 
-  openToaster() {
-    const message = this.languageService.getNow('edit.update')
-
+  openToaster(message: string, type?: 'info' | 'warn' | 'error') {
     this.toaster.open(message, '', {
-      verticalPosition: 'top', duration: 3000
+      verticalPosition: 'top', duration: 3000, panelClass: [type || '', 'no-action']
     })
   }
 
