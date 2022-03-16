@@ -1,15 +1,29 @@
 export interface Translate {
-  home: Home
-  business: Business
-  pagination: Pagination
-  user: User
-  currency: string
+  readonly home: Home
+  readonly edit: Edit
+  readonly business: Business
+  readonly pagination: Pagination
+  readonly user: User
+  readonly currency: string
+  readonly alert: Alert
 }
 
 type Home = {
   title: string
   description: string
   search: string
+}
+
+type Edit = {
+  title: string
+  description: string
+  company: string
+  address: string
+  back: string
+  save: string
+  positive: string
+  negative: string
+  update: string
 }
 
 type Business = {
@@ -35,4 +49,12 @@ type Pagination = {
 
 type User = {
   director: string
+}
+
+type Alert = {
+  update: string
+  noItems: string
+  cepError: string
+  cepWarn: string
+  apiError: string
 }
