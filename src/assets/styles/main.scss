@@ -3,6 +3,7 @@
 @charset 'utf-8';
 
 @use '@angular/material' as mat;
+@use 'base';
 @use 'theme';
 @use 'typography';
 
@@ -15,23 +16,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.no-action .mat-simple-snackbar {
-  justify-content: center;
-}
-
-.mat-snackbar-container {
-  background-color: tomato;
-}
-
-.warn {
-  color: white;
-  //background-color: map-get(theme.$light, primary, default)
-}
-
 @include mat.core();
-
-//@debug mat.get-color-config(theme.$dark);
-
 @include mat.all-component-themes(theme.$light);
 
 .dark-theme {

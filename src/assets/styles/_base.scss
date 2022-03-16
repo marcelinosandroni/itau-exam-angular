@@ -1,0 +1,12 @@
+@use 'theme';
+
+// Alerts
+
+.no-action .mat-simple-snackbar {
+  justify-content: center;
+}
+
+.mat-snack-bar-container.warn {
+  color: white;
+  background-color: map-get(theme.$light, primary, default)
+}
